@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AI-Chuẩn đoán X-RAY PREDICT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="This is an example dashboard created using build-in elements and components.">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+
+    <style>
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: large;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .info {
+            text-align: left;
+            color: gray;
+            width: 30%;
+            margin: auto;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .content {
+            width: 100%;
+        }
+        
+        .upload_part {
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .upload_button {
+            background-color: #FEED06;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+        
+        .upload_hint {
+            margin: 10px;
+            font-size: 14px;
+            color: rgb(200, 200, 200);
+        }
+        
+        .result_part {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .result_title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .result_id {
+            padding: 10px;
+            margin: 15px;
+            font-size: 16px;
+        }
+        
+        .result_id_number {
+            margin: 15px;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: #FEED06;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div>X-RAY PREDICT</div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button"
+                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-left">
+                    <div class="search-wrapper">
+                        <div class="input-holder">
+                            <input type="text" class="search-input" placeholder="Type to search">
+                            <button class="search-icon"><span></span></button>
+                        </div>
+                        <button class="close"></button>
+                    </div>
+                    <ul class="header-menu nav">
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link">
+                                <i class="nav-link-icon fa fa-database"> </i> Phân tích dữ liệu X-RAY
+                            </a>
+                        </li>
+                        <li class="btn-group nav-item">
+                            <a href="javascript:void(0);" class="nav-link">
+                                <i class="nav-link-icon fa fa-edit"></i> Dự án
+                            </a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="javascript:void(0);" class="nav-link">
+                                <i class="nav-link-icon fa fa-cog"></i> Cài đặt
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="app-header-right">
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        </a>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                            <button type="button" tabindex="0" class="dropdown-item">Tài khoản</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">Cài đặt</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">Chỉnh sửa</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">Thông
+                                                tin</button>
+                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            <button type="button" tabindex="0" class="dropdown-item">Chú
+                                                thích</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">
+                                        Nhật ký
+                                    </div>
+                                    <div class="widget-subheading">
+                                        Quản lý người dùng
+                                    </div>
+                                </div>
+                                <div class="widget-content-right header-user-info ml-3">
+                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="app-header__logo">
+                    <div class="logo-src"></div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="app-header__menu">
+                    <span>
+                        <button type="button"
+                            class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                            <span class="btn-icon-wrapper">
+                                <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            </span>
+                    </button>
+                    </span>
+                </div>
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">Trang chủ</li>
+                            <li>
+                                <a href="index.html" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-look"></i> X-RAY PREDICT
+                                </a>
+                            </li>
+                            <li class="app-sidebar__heading">Tư vấn</li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-global"></i> Loại chuẩn đoán
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="elements-buttons-standard.html">
+                                            <i class="metismenu-icon"></i> Xương
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-dropdowns.html">
+                                            <i class="metismenu-icon">
+                                            </i>Phổi
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-icons.html">
+                                            <i class="metismenu-icon">
+                                            </i>Gan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-badges-labels.html">
+                                            <i class="metismenu-icon">
+                                            </i>Tim
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-cards.html">
+                                            <i class="metismenu-icon">
+                                            </i>Thận
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-list-group.html">
+                                            <i class="metismenu-icon">
+                                            </i>Dạ dày
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-help1"></i> Blog tư vấn
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="components-tabs.html">
+                                            <i class="metismenu-icon">
+                                            </i>Tư vấn bệnh lý
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="components-accordions.html">
+                                            <i class="metismenu-icon">
+                                            </i>Chỉ thị của các bác sĩ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="components-notifications.html">
+                                            <i class="metismenu-icon">
+                                            </i>Các bệnh lý thương gặp
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="components-modals.html">
+                                            <i class="metismenu-icon">
+                                            </i>Thực đơn bệnh lý
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="app-sidebar__heading">Biểu đồ bệnh lý</li>
+                            <li>
+                                <a href="charts-chartjs.html">
+                                    <i class="metismenu-icon pe-7s-graph2">
+                                    </i>Biểu đồ
+                                </a>
+                            </li>
+                            <li class="app-sidebar__heading">Nâng cấp phiên bản</li>
+                            <li>
+                                <a href="https://dashboardpack.com/theme-details/architectui-dashboard-html-pro/" target="_blank">
+                                    <i class="metismenu-icon pe-7s-graph1">
+                                    </i> Thông tin phiên bản
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-look icon-gradient bg-mean-fruit">
+                                    </i>
+                                </div>
+                                <div>X-RAY PREDICT
+                                    <div class="page-title-subheading">Chương trình chuẩn đoán thể trạng cơ thể
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-title-actions">
+                                <button type="button" data-toggle="tooltip" title="Yêu Thích" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                                    <i class="fa fa-star"></i>
+                                </button>
+                                <div class="d-inline-block dropdown">
+                                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                                        <span class="btn-icon-wrapper pr-2 opacity-7">
+                                            <i class="fa fa-business-time fa-w-20"></i>
+                                        </span>
+                                        Liên lạc
+                                    </button>
+                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
+                                                    <i class="nav-link-icon lnr-inbox"></i>
+                                                    <span>
+                                                        Thông báo
+                                                    </span>
+                                                    <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
+                                                    <i class="nav-link-icon lnr-book"></i>
+                                                    <span>
+                                                        Đặt lịch
+                                                    </span>
+                                                    <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
+                                                    <i class="nav-link-icon lnr-picture"></i>
+                                                    <span>
+                                                        Tư vấn
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                                    <i class="nav-link-icon lnr-file-empty"></i>
+                                                    <span>
+                                                        Thông tin chi tiết
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-midnight-bloom">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Tổng số người dùng</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>34</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-arielle-smile">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Số người theo dõi</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>73</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-grow-early">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Số ảnh đã lưu trữ</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>146</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class='header'>
+                            X-Ray Predict
+                        </div>
+                        <div class='content'>
+
+                            <div class='upload_part'>
+                                <button class='upload_button' id="upload_button">Chọn file ảnh ...</button>
+                                <div class='upload_hint' id='upload_hint'>
+                                    Các định dạng được hỗ trợ: PNG, JPG và JPEG.
+                                </div>
+                                <form action="/" method="POST" enctype="multipart/form-data" id='form'>
+                                    <input type="file" name="file" id="fileinput" style="display: none;" accept="image/*">
+                                </form>
+                            </div>
+
+                            <div class='result_part'>
+                                {% if msg %}
+                                <div class='result_title'><b>Kết quả </b></div>
+                                <div class='result_id'>{{ msg }}</div>
+
+                                <img style="max-width:300px; border-radius:1rem" src="{{ url_for('static', filename=user_image) }}?{{ rand }}" alt="User Image"> {% endif %} {% if extra %}
+                                <div class='result_id'><b>Diễn giải:</b> {{ extra }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-header">Trạng thái người dùng
+                                    <div class="btn-actions-pane-right">
+                                        <div role="group" class="btn-group-sm btn-group">
+                                            <button class="active btn btn-focus">Tuần</button>
+                                            <button class="btn btn-focus">Năm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th>Tên</th>
+                                                <th class="text-center">Nơi ở</th>
+                                                <th class="text-center">Trạng thái</th>
+                                                <th class="text-center">Thông tin</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center text-muted">#1</td>
+                                                <td>
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="widget-content-left">
+                                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-content-left flex2">
+                                                                <div class="widget-heading">Nguyễn Văn Anh</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">Hà Nội</td>
+                                                <td class="text-center">
+                                                    <div class="badge badge-warning">Vừa sử dụng</div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Thông tin</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center text-muted">#2</td>
+                                                <td>
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="widget-content-left">
+                                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-content-left flex2">
+                                                                <div class="widget-heading">Cao Đức Anh</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">Việt Trì</td>
+                                                <td class="text-center">
+                                                    <div class="badge badge-success">Đang sử dụng</div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" id="PopoverCustomT-2" class="btn btn-primary btn-sm">Thông tin</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-block text-center card-footer">
+                                    <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i
+                                            class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                    <button class="btn-wide btn btn-success">In</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
+                                <div class="widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left pr-2 fsize-1">
+                                                <div class="widget-numbers mt-0 fsize-3 text-danger">71%</div>
+                                            </div>
+                                            <div class="widget-content-right w-100">
+                                                <div class="progress-bar-xs progress">
+                                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100" style="width: 71%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left fsize-1">
+                                            <div class="text-muted opacity-6">Mục tiêu</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card-shadow-success mb-3 widget-chart widget-chart2 text-left card">
+                                <div class="widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left pr-2 fsize-1">
+                                                <div class="widget-numbers mt-0 fsize-3 text-success">54%</div>
+                                            </div>
+                                            <div class="widget-content-right w-100">
+                                                <div class="progress-bar-xs progress">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left fsize-1">
+                                            <div class="text-muted opacity-6">Yêu thích</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card-shadow-warning mb-3 widget-chart widget-chart2 text-left card">
+                                <div class="widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left pr-2 fsize-1">
+                                                <div class="widget-numbers mt-0 fsize-3 text-warning">32%</div>
+                                            </div>
+                                            <div class="widget-content-right w-100">
+                                                <div class="progress-bar-xs progress">
+                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100" style="width: 32%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left fsize-1">
+                                            <div class="text-muted opacity-6">Nâng cấp</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card-shadow-info mb-3 widget-chart widget-chart2 text-left card">
+                                <div class="widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left pr-2 fsize-1">
+                                                <div class="widget-numbers mt-0 fsize-3 text-info">89%</div>
+                                            </div>
+                                            <div class="widget-content-right w-100">
+                                                <div class="progress-bar-xs progress">
+                                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" style="width: 89%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left fsize-1">
+                                            <div class="text-muted opacity-6">Đánh giá</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js">
+    </script>
+</body>
+<script>
+    $('#upload_button').click(function() {
+        $("#fileinput").trigger('click');
+    });
+
+    $('#fileinput').change(function() {
+        $('#form').submit();
+        $('#upload_hint').text('Đang tải file ' + $('#fileinput')[0].files[0].name + ' lên server...');
+    });
+</script>
+
+</html>
