@@ -3,8 +3,11 @@ from flask import Flask, render_template, request
 from flask import Markup
 from flask_cors import CORS, cross_origin
 import os
+import base64
 
 import random
+
+from PIL import Image
 
 
 import cv2
@@ -24,9 +27,9 @@ from utils.torch_utils import select_device
 app = Flask(__name__)
 
 # Apply Flask CORS
-CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = "static"
+cors = CORS(app)
+
 
 # Load model
 weights = 'best.pt'
@@ -52,7 +55,7 @@ for line in desc:
     dict[line.split('|')[0]] = line.split('|')[1]
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['POST'])
 def home_page():
     image = request.files['file']
     if image:
@@ -93,7 +96,6 @@ def home_page():
             # Inference
             pred = model(img, augment=False)[0]
             # pred = model(img, augment=False, visualize=False)
-            
             # Apply NMS
             # pred = non_max_suppression(pred, conf_thres, iou_thres, classes=None, agnostic=False)
             pred = non_max_suppression(pred, conf_thres, iou_thres, classes=None, agnostic=False)
@@ -130,11 +132,18 @@ def home_page():
                 # Save results (image with detections)
                 if save_img:
                     if dataset.mode == 'image':
+                        print(save_path)
                         cv2.imwrite(save_path, im0)
 
+
+
+        with open(source, "rb") as f:
+            image_string = base64.b64encode(f.read())
+
         # Trả về kết quả
-        return (image.filename)
+        return image_string
+
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='3000', debug=True)
+    app.run( port='3001', debug=True)
