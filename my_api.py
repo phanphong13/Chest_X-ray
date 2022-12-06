@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, json
 from flask import Markup
 from flask_cors import CORS, cross_origin
 import os
@@ -52,7 +52,7 @@ desc = f.readlines()
 f.close()
 dict = {}
 for line in desc:
-    dict[line.split('|')[0]] = line.split('|')[1]
+    dict[line.split('|')[0]] = line.split('|')[1].replace("\n", "")
 
 
 @app.route("/", methods=['POST'])
@@ -114,6 +114,7 @@ def home_page():
                     
                     det[:, :4] = scale_boxes(img.shape[2:], det[:, :4], im0.shape).round()
                     # Write results
+                    explain = []
                     for *xyxy, conf, cls in reversed(det):
                         if save_img:  # Add bbox to image
                             # annotator.box_label(xyxy, label, color=colors(c, True))
@@ -125,8 +126,11 @@ def home_page():
                             print(_colors[1])
                             annotator.box_label(xyxy, label, color=colors(int(cls), True))
                             print("dot2")
-                            extra += "<br>- <b>" + str(names[int(cls)]) + "</b> (" + dict[names[int(cls)]] \
-                                            + ") với độ tin cậy <b>{:.2f} </b>".format(conf)
+                            extra += str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf)
+                            explain.append(str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf))
+                            
+                    
+                    print(explain)
                             
                 
                 # Save results (image with detections)
@@ -140,10 +144,19 @@ def home_page():
         with open(source, "rb") as f:
             image_string = base64.b64encode(f.read())
 
+        data = {
+            'image_base64': str(image_string),
+            'explain': str(explain)
+        }
+
+        print(data)
+
+        response = app.response_class(response=json.dumps(data),
+                    status=200,
+                    mimetype='application/json')
+
         # Trả về kết quả
-        return image_string
-
-
+        return response
 
 if __name__ == '__main__':
     app.run( port='3001', debug=True)
