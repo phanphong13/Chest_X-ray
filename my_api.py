@@ -122,11 +122,11 @@ def home_page():
                             
                             label = f'{names[int(cls)]} {conf:.2f}'
                             # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=2)
-                            print("dot1")
-                            print(_colors[1])
+                            # print("dot1")
+                            # print(_colors[1])
                             annotator.box_label(xyxy, label, color=colors(int(cls), True))
-                            print("dot2")
-                            extra += str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf)
+                            # print("dot2")
+                            # extra += str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf)
                             explain.append(str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf))
                             
                     
