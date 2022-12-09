@@ -102,13 +102,14 @@ def home_page():
             
             extra = ""
             # Process detections
+            # print(pred)
             
             for i, det in enumerate(pred):  # detections per image
                 p, s, im0, frame = path, '', im0s, getattr(dataset, 'frame', 0)
                 annotator = Annotator(im0, line_width=2, example=str(names))
                 # p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
                 save_path = source
-                
+                print(det)
                 if len(det):
                     # Rescale boxes from img_size to im0 size
                     
@@ -128,28 +129,29 @@ def home_page():
                             # print("dot2")
                             # extra += str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf)
                             explain.append(str(names[int(cls)]) + "(" + dict[names[int(cls)]] + ") với độ tin cậy {:.2f}".format(conf))
+                    if save_img:
+                        if dataset.mode == 'image':
+                            print(save_path)
+                            cv2.imwrite(save_path, im0)
                             
-                    
-                    print(explain)
+                    with open(source, "rb") as f:
+                        image_string = base64.b64encode(f.read())
+
+                    data = {
+
+                        'code': '1',
+                        'image_base64': str(image_string),
+                        'explain': str(explain)
+                    }
+                else:
+                    data = {
+                        'code': '0',
+                        'message': 'Không tìm thấy tổn thương. Hãy thử với loại chẩn đoán khác.'
+                    }   
                             
                 
                 # Save results (image with detections)
-                if save_img:
-                    if dataset.mode == 'image':
-                        print(save_path)
-                        cv2.imwrite(save_path, im0)
 
-
-
-        with open(source, "rb") as f:
-            image_string = base64.b64encode(f.read())
-
-        data = {
-            'image_base64': str(image_string),
-            'explain': str(explain)
-        }
-
-        print(data)
 
         response = app.response_class(response=json.dumps(data),
                     status=200,
